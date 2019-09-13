@@ -1,4 +1,4 @@
-{
+node {
   stage('build & deploy') {
     openshiftBuild bldCfg: 'getstartednode',
       namespace: 'development',
