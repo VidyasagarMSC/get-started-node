@@ -1,9 +1,9 @@
 node {
   stage('build & deploy') {
-    openshiftBuild bldCfg: 'getstartednode',
+    openshiftBuild bldCfg: 'get-started-node',
       namespace: 'development',
       showBuildLogs: 'true'
-    openshiftVerifyDeployment depCfg: 'getstartednode',
+    openshiftVerifyDeployment depCfg: 'get-started-node',
       namespace: 'development'
   }
   stage('approval (test)') {
@@ -11,13 +11,13 @@ node {
       id: 'approval'
   }
   stage('deploy to test') {
-    openshiftTag srcStream: 'getstartednode',
+    openshiftTag srcStream: 'get-started-node',
       namespace: 'development',
       srcTag: 'latest',
       destinationNamespace: 'testing',
-      destStream: 'getstartednode',
+      destStream: 'get-started-node',
       destTag: 'test'
-    openshiftVerifyDeployment depCfg: 'getstartednode',
+    openshiftVerifyDeployment depCfg: 'get-started-node',
       namespace: 'testing'
   }
   stage('approval (production)') {
@@ -25,13 +25,13 @@ node {
       id: 'approval'
   }
   stage('deploy to production') {
-    openshiftTag srcStream: 'getstartednode',
+    openshiftTag srcStream: 'get-started-node',
       namespace: 'development',
       srcTag: 'latest',
       destinationNamespace: 'production',
-      destStream: 'getstartednode',
+      destStream: 'get-started-node',
       destTag: 'prod'
-    openshiftVerifyDeployment depCfg: 'getstartednode',
+    openshiftVerifyDeployment depCfg: 'get-started-node',
       namespace: 'production'
   }
 }
